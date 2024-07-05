@@ -3,6 +3,8 @@ const Product = require("../model/product.model.js");
 
 const router = express.Router();
 
+console.log("Hello world jaaa");
+
 //ดึงข้อมูลสินค้าทุกตัว
 router.get("/", async (req, res, next) => {
   const products = await Product.findOne();
