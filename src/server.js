@@ -1,5 +1,8 @@
 require("dotenv").config();
-require("express");
+const productRoute = require("./routes/productRoute.js");
+const cartRoute = require("./routes/cartRoute.js");
+const orderRoute = require("./routes/orderRuote.js");
+const userRoute = require("./routes/userRoute.js");
 
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGO_URI);
@@ -9,7 +12,6 @@ mongoose.connection.on("connected", () => {
 
 const express = require("express");
 const cors = require("cors");
-const Product = require("./model/product.model");
 
 const PORT = process.env.PORT;
 const app = express();
@@ -21,12 +23,10 @@ app.use(
   })
 );
 
-app.get("/products", async (req, res, next) => {
-  const products = await Product.findOne();
-  console.log(products);
-
-  res.json("products connected");
-});
+app.use("/users", userRoute);
+app.use("/products", productRoute);
+app.use("/carts", cartRoute);
+app.use("/order", orderRoute);
 
 app.listen(PORT, () => {
   console.log(`Server PORT ${PORT} good 💥`);
