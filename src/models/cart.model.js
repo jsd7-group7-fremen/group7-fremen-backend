@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+import mongoose from "mongoose";
+const { Schema } = mongoose;
 
 const cartSchema = new Schema({});
 
-module.exports = mongoose.model("Cart", cartSchema);
+export default mongoose.model("Cart", cartSchema);
