@@ -1,17 +1,20 @@
-require("dotenv").config();
-const productRoute = require("./routes/productRoute.js");
-const cartRoute = require("./routes/cartRoute.js");
-const orderRoute = require("./routes/orderRuote.js");
-const userRoute = require("./routes/userRoute.js");
+import "dotenv/config";
+import productRoute from "./routes/productRoute.js";
+import cartRoute from "./routes/cartRoute.js";
+import orderRoute from "./routes/orderRoute.js";
+import userRoute from "./routes/userRoute.js";
+import authRoute from "./routes/authRoute.js";
 
-const mongoose = require("mongoose");
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+
 mongoose.connect(process.env.MONGO_URI);
 mongoose.connection.on("connected", () => {
   console.log("Connected to Mongodb💚");
 });
 
-const express = require("express");
-const cors = require("cors");
+// const cors = require("cors");
 
 const PORT = process.env.PORT;
 const app = express();
@@ -23,6 +26,7 @@ app.use(
   })
 );
 
+app.use("/auth", authRoute);
 app.use("/users", userRoute);
 app.use("/products", productRoute);
 app.use("/carts", cartRoute);
