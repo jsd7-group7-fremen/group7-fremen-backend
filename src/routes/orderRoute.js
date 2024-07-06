@@ -1,5 +1,5 @@
-const express = require("express");
-const Order = require("../model/order.model.js");
+import express from "express";
+import Order from "../models/order.model.js";
 
 const router = express.Router();
 
@@ -17,4 +17,4 @@ router.post("/", async (req, res, next) => {});
 //ลบคำสั่งซื้อสินค้า (Soft Delete)
 router.delete("/:orderId", async (req, res, next) => {});
 
-module.exports = router;
+export default router;

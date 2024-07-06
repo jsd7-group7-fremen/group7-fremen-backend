@@ -1,5 +1,5 @@
-const express = require("express");
-const User = require("../model/user.model.js");
+import express from "express";
+import User from "../models/user.model.js";
 
 const router = express.Router();
 
@@ -14,4 +14,4 @@ router.get("/:userId", async (req, res, next) => {});
 //ลบบัญชีผู้ใช้งาน (Soft Delete)
 router.delete("/:userId", async (req, res, next) => {});
 
-module.exports = router;
+export default router;

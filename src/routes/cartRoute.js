@@ -1,5 +1,5 @@
-const express = require("express");
-const Cart = require("../model/cart.model.js");
+import express from "express";
+import Cart from "../models/cart.model.js";
 
 const router = express.Router();
 
@@ -23,4 +23,4 @@ router.put("/:cartId", async (req, res, next) => {});
 //ลบตะกร้าทิ้ง
 router.delete("/:cartId", async (req, res, next) => {});
 
-module.exports = router;
+export default router;
