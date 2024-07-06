@@ -1,7 +1,7 @@
 require("dotenv").config();
 const productRoute = require("./routes/productRoute.js");
 const cartRoute = require("./routes/cartRoute.js");
-const orderRoute = require("./routes/orderRuote.js");
+const orderRoute = require("./routes/orderRoute.js");
 const userRoute = require("./routes/userRoute.js");
 
 const mongoose = require("mongoose");
