@@ -1,5 +1,5 @@
-const express = require("express");
-const Product = require("../model/product.model.js");
+import express from "express";
+import Product from "../models/product.model.js";
 
 const router = express.Router();
 
@@ -25,4 +25,4 @@ router.patch("/:productId", async (req, res, next) => {});
 //ลบสินค้าแต่ละรายการ
 router.delete("/:productId", async (req, res, next) => {});
 
-module.exports = router;
+export default router;
