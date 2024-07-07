@@ -11,6 +11,8 @@ import authRoute from "./routes/authRoute.js";
 
 import errorMiddleware from "./middleware/errorMiddleware.js";
 import notFoundMiddleware from "./middleware/notfoundMiddleware.js";
+import authenticateMiddleware from "./middleware/authenticateMiddleware.js";
+import adminAuthenticateMiddleware from "./middleware/adminAuthenticateMiddleware.js";
 
 mongoose.connect(process.env.MONGO_URI);
 mongoose.connection.on("connected", () => {
@@ -30,9 +32,9 @@ app.use(
 );
 
 app.use("/auth", authRoute);
-app.use("/users", userRoute);
+app.use("/users", adminAuthenticateMiddleware, userRoute);
 app.use("/products", productRoute);
-app.use("/carts", cartRoute);
+app.use("/carts", authenticateMiddleware, cartRoute);
 app.use("/order", orderRoute);
 
 app.use(notFoundMiddleware);
