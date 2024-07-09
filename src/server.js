@@ -12,14 +12,12 @@ import authRoute from "./routes/authRoute.js";
 import errorMiddleware from "./middleware/errorMiddleware.js";
 import notFoundMiddleware from "./middleware/notfoundMiddleware.js";
 import authenticateMiddleware from "./middleware/authenticateMiddleware.js";
-import adminAuthenticateMiddleware from "./middleware/adminAuthenticateMiddleware.js";
+// import adminAuthenticateMiddleware from "./middleware/adminAuthenticateMiddleware.js";
 
 mongoose.connect(process.env.MONGO_URI);
 mongoose.connection.on("connected", () => {
   console.log("Connected to Mongodb💚");
 });
-
-// const cors = require("cors");
 
 const PORT = process.env.PORT;
 const app = express();
@@ -30,11 +28,11 @@ app.use(
     origin: "*",
   })
 );
-
+// add authenticateMiddleware and adminAuthenticateMiddleware
 app.use("/auth", authRoute);
-app.use("/users", adminAuthenticateMiddleware, userRoute);
+app.use("/users", authenticateMiddleware, userRoute);
 app.use("/products", productRoute);
-app.use("/carts", authenticateMiddleware, cartRoute);
+app.use("/carts", cartRoute);
 app.use("/order", orderRoute);
 
 app.use(notFoundMiddleware);

@@ -83,6 +83,7 @@ const login = async (req, res, next) => {
 };
 
 const getProfile = async (req, res, next) => {
+  // console.log("req =>", req);
   res.send("GET /api/auth/profile");
 };
 

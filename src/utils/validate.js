@@ -1,7 +1,7 @@
 import Joi from "joi";
 
 export const registerSchema = Joi.object({
-  fullName: Joi.string().required(),
+  fullName: Joi.string().min(3).max(60).required(),
   email: Joi.string().email().required(),
   password: Joi.string().min(4).max(12).required(),
   image: Joi.string(),
@@ -20,9 +20,9 @@ const loginSchema = Joi.object({
 const productSchema = Joi.object({
   productName: Joi.string().required(),
   brand: Joi.string().required(),
-  stock: Joi.number(),
+  stock: Joi.number().min(0),
   category: Joi.array().items(Joi.string().required()),
-  price: Joi.number(),
+  price: Joi.number().min(0),
   sizeUs: Joi.string().required(),
   color: Joi.string().required(),
   description: Joi.string().required(),
@@ -34,7 +34,6 @@ const orderSchema = Joi.object({
   products: Joi.array().required(),
   userId: Joi.string(),
   createdAt: Joi.date(),
-  isDeleted: Joi.boolean(),
   updatedAt: Joi.date(),
 });
 

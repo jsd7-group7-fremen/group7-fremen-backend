@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 const sign = (payload) => {
   console.log("Sign Token", process.env.ACCESS_TOKEN_SECRET);
   return jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
-    expiresIn: "12d",
+    expiresIn: "7d",
   });
 };
 
