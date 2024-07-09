@@ -18,7 +18,6 @@ const register = async (req, res, next) => {
       dateOfBirth,
     } = req.body;
 
-    // ทำ Validate
     const { error } = await validateRegister({
       fullName,
       email,
