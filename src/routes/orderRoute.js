@@ -1,11 +1,9 @@
-// Import necessary modules
-const express = require("express");
-const Order = require("../model/order.model.js");
+import express from "express";
+import Order from "../models/order.model.js";
 
-// Create a router instance
 const router = express.Router();
 
-// GET all orders
+// GET all order
 router.get("/", async (req, res, next) => {
   try {
     const orders = await Order.find();
@@ -39,37 +37,4 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-// DELETE (soft delete) an order by ID
-router.delete("/:orderId", async (req, res, next) => {
-  try {
-    const order = await Order.findById(req.params.orderId);
-    if (!order) {
-      return res.status(404).json({ message: "Order not found" });
-    }
-    order.isDeleted = true;
-    const deletedOrder = await order.save();
-    res.json(deletedOrder);
-  } catch (error) {
-    next(error);
-  }
-});
-
-// PUT update an order by ID
-router.put("/:orderId", async (req, res, next) => {
-  try {
-    const orderId = req.params.orderId;
-    const updatedOrder = await Order.findByIdAndUpdate(orderId, req.body, {
-      new: true,
-      runValidators: true,
-    });
-    if (!updatedOrder) {
-      return res.status(404).json({ message: "Order not found" });
-    }
-    res.json(updatedOrder);
-  } catch (error) {
-    next(error);
-  }
-});
-
-// Export the router
-module.exports = router;
+export default router;
