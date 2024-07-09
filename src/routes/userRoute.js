@@ -1,17 +1,15 @@
-const express = require("express");
-const User = require("../model/user.model.js");
+// Set Route & Connect to userController
+import express from "express";
+import {
+  getAllUsers,
+  getUserById,
+  deleteUserById,
+} from "../controllers/userController.js";
 
 const router = express.Router();
 
-//ดึงข้อมูลผู้ใช้งานทุกคน
-router.get("/", async (req, res, next) => {
-  res.json("user connected");
-});
+router.get("/", getAllUsers);
+router.get("/:userId", getUserById);
+router.delete("/:userId", deleteUserById);
 
-//ดึงข้อมูลผู้ใช้งานโดย admin
-router.get("/:userId", async (req, res, next) => {});
-
-//ลบบัญชีผู้ใช้งาน (Soft Delete)
-router.delete("/:userId", async (req, res, next) => {});
-
-module.exports = router;
+export default router;
