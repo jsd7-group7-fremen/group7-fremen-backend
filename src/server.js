@@ -30,7 +30,7 @@ app.use(
 );
 // add authenticateMiddleware and adminAuthenticateMiddleware
 app.use("/auth", authRoute);
-app.use("/users", authenticateMiddleware, userRoute);
+app.use("/users", userRoute);
 app.use("/products", productRoute);
 app.use("/carts", cartRoute);
 app.use("/order", orderRoute);
