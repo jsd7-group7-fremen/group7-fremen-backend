@@ -16,6 +16,7 @@ const userSchema = new Schema({
   createdDate: { type: Date, default: Date.now }, // ISODate
   gender: { type: String, enum: ["male", "female", "other"], required: true }, // Valid value only 3 list
   dateOfBirth: { type: Date },
+  cart: [],
 });
 
 export default mongoose.model("User", userSchema);
