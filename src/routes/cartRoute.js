@@ -1,26 +1,21 @@
 import express from "express";
-import Cart from "../models/cart.model.js";
+import * as cartController from "../controllers/cartController.js";
 
 const router = express.Router();
 
-//ดึงข้อมูลสินค้าจากตะกร้าทั้งหมด
-router.get("/", async (req, res, next) => {
-  const carts = await Cart.findOne();
-  console.log(carts);
+// เพิ่มสินค้าในตะกร้า
+router.post("/", cartController.addToCart);
 
-  res.json("carts connected");
-});
+// ลบสินค้าออกจากตะกร้า
+router.delete("/", cartController.removeFromCart);
 
-//ดึงข้อมูลสินค้าจากตะกร้าแต่ละตะกร้า
-router.get("/:cartId", async (req, res, next) => {});
+// อัปเดตจำนวนสินค้าในตะกร้า
+router.patch("/", cartController.updateCart);
 
-//สร้างตะกร้าสินค้าใหม่
-router.post("/", async (req, res, next) => {});
+// ดึงข้อมูลตะกร้าสินค้าของผู้ใช้
+router.get("/:userId", cartController.getCart);
 
-//ลบสินค้าเดิมทิ้งหมดในตะกร้า แล้วเอาสินค้าจากตะกร้าหน้าบ้านทั้งหมดมาใส่ในตะกร้าเดิม
-router.put("/:cartId", async (req, res, next) => {});
-
-//ลบตะกร้าทิ้ง
-router.delete("/:cartId", async (req, res, next) => {});
+// ลบตะกร้าสินค้าของผู้ใช้
+router.post("/clear", cartController.clearCart);
 
 export default router;
