@@ -3,18 +3,38 @@ import Order from "../models/order.model.js";
 
 const router = express.Router();
 
-//คำสั่งซื้อสินค้าทั้งหมด
+// GET all order
 router.get("/", async (req, res, next) => {
-  res.json("user connected");
+  try {
+    const orders = await Order.find();
+    res.json(orders);
+  } catch (error) {
+    next(error);
+  }
 });
 
-//คำสั่งซื้อสินค้ารายการบุคคล
-router.get("/:orderId", async (req, res, next) => {});
+// GET a specific order by ID
+router.get("/:orderId", async (req, res, next) => {
+  try {
+    const order = await Order.findById(req.params.orderId);
+    if (!order) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+    res.json(order);
+  } catch (error) {
+    next(error);
+  }
+});
 
-//สร้างคำสั่งซื้อสินค้า
-router.post("/", async (req, res, next) => {});
-
-//ลบคำสั่งซื้อสินค้า (Soft Delete)
-router.delete("/:orderId", async (req, res, next) => {});
+// POST create a new order
+router.post("/", async (req, res, next) => {
+  try {
+    const newOrder = new Order(req.body);
+    const savedOrder = await newOrder.save();
+    res.status(201).json(savedOrder);
+  } catch (error) {
+    next(error);
+  }
+});
 
 export default router;
