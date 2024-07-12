@@ -10,8 +10,8 @@ router.post("/login", authController.login);
 
 router.get("/profile", authenticateMiddleware, authController.getProfile);
 
-router.patch("/profile", authController.updateProfile);
+router.patch("/profile", authenticateMiddleware, authController.updateProfile);
 
-router.delete("/profile", authController.deleteProfile);
+router.delete("/profile", authenticateMiddleware, authController.deleteProfile);
 
 export default router;

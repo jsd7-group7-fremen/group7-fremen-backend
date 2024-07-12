@@ -3,6 +3,8 @@ import User from "../models/user.model.js";
 import { sign } from "../utils/token.js";
 import { validateRegister } from "../utils/validate.js";
 import BadRequestError from "../error/BadRequestError.js";
+import NotFoundError from "../error/NotFoundError.js";
+import NoChangesError from "../error/NoChangesError.js";
 
 const register = async (req, res, next) => {
   try {
@@ -82,16 +84,71 @@ const login = async (req, res, next) => {
 };
 
 const getProfile = async (req, res, next) => {
-  // console.log("req =>", req);
-  res.send("GET /api/auth/profile");
+  try {
+    const { _id } = req.user;
+    console.log(_id);
+    // const { userId } = req.params;
+    // console.log(userId);
+    const user = await User.findById(_id);
+    if (!user) {
+      throw new NotFoundError(`User not found`);
+    }
+    res.status(200).json({
+      user,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 const updateProfile = async (req, res, next) => {
-  res.send("PATCH /api/auth/profile");
+  try {
+    const { fullName, email, image, gender, dateOfBirth } = req.body;
+    const { _id } = req.user;
+    const user = await User.findById(_id);
+
+    if (!user) {
+      throw new NotFoundError(`User not found`);
+    }
+
+    if (!fullName && !email && !image && !gender && !dateOfBirth) {
+      throw new NoChangesError(`Not thing change`);
+    }
+
+    if (fullName) user.fullName = fullName;
+    if (email) user.email = email;
+    if (image) user.image = image;
+    if (gender) user.gender = gender;
+    if (dateOfBirth) user.dateOfBirth = dateOfBirth;
+
+    await user.save();
+    res.status(200).json({
+      user,
+      message: "updated successfully",
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 const deleteProfile = async (req, res, next) => {
-  res.send("DELETE /api/auth/profile");
+  try {
+    const { _id, userStatus } = req.user;
+    const user = await User.findById(_id);
+    if (!user) {
+      throw new NotFoundError(`User not found`);
+    }
+
+    user.userStatus = "inactive";
+    await user.save();
+
+    console.log("userStatus => ", user);
+    res.status(200).json({
+      massage: "Delete complete",
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 export { register, login, getProfile, updateProfile, deleteProfile };
