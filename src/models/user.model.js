@@ -32,7 +32,7 @@ const userSchema = new Schema({
     enum: ["active", "inactive", "deleted"],
     default: "active",
   }, // add deleted in enum for software deleted | default active
-  createdDate: { type: Date, default: Date.now }, // ISODate
+  createdDate: { type: Date, default: Date.now() }, // ISODate
   gender: { type: String, enum: ["male", "female", "other"], required: true }, // Valid value only 3 list
   dateOfBirth: { type: Date },
   cart: [cartItemSchema]

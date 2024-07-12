@@ -8,7 +8,7 @@ const adminAuthenticateMiddleware = async (req, res, next) => {
     if (!token) throw new UnAuthorizeError("Unauthenticated");
     const decoded = verify(token);
     const user = await User.findById(decoded.id);
-    console.log("Admin", user.isAdmin);
+
     if (!user) throw new UnAuthorizeError("Unauthenticated");
     if (!user.isAdmin) throw new UnAuthorizeError("Unauthenticated");
 
