@@ -3,15 +3,15 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 
-import productRoute from "./routes/productRoute.js";
-import cartRoute from "./routes/cartRoute.js";
-import orderRoute from "./routes/orderRoute.js";
-import userRoute from "./routes/userRoute.js";
-import authRoute from "./routes/authRoute.js";
+import productRoute from "./src/routes/productRoute.js";
+import cartRoute from "./src/routes/cartRoute.js";
+import orderRoute from "./src/routes/orderRoute.js";
+import userRoute from "./src/routes/userRoute.js";
+import authRoute from "./src/routes/authRoute.js";
 
-import errorMiddleware from "./middleware/errorMiddleware.js";
-import notFoundMiddleware from "./middleware/notfoundMiddleware.js";
-import authenticateMiddleware from "./middleware/authenticateMiddleware.js";
+import errorMiddleware from "./src/middleware/errorMiddleware.js";
+import notFoundMiddleware from "./src/middleware/notfoundMiddleware.js";
+// import authenticateMiddleware from "./src/middleware/authenticateMiddleware.js";
 // import adminAuthenticateMiddleware from "./middleware/adminAuthenticateMiddleware.js";
 
 mongoose.connect(process.env.MONGO_URI);
