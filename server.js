@@ -10,7 +10,7 @@ import userRoute from "./src/routes/userRoute.js";
 import authRoute from "./src/routes/authRoute.js";
 
 import errorMiddleware from "./src/middleware/errorMiddleware.js";
-import notFoundMiddleware from "./src/middleware/notfoundMiddleware.js";
+import notFoundMiddleware from "./src/middleware/notFoundMiddleware.js";
 // import authenticateMiddleware from "./src/middleware/authenticateMiddleware.js";
 // import adminAuthenticateMiddleware from "./middleware/adminAuthenticateMiddleware.js";
 
