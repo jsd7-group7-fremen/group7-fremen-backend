@@ -1,9 +1,11 @@
 import express from "express";
 import Order from "../models/order.model.js";
+import { validateOrder } from "../utils/validate.js";
+import NotFoundError from "../error/NotFoundError.js";
 
 const router = express.Router();
 
-// GET all order
+// GET all orders
 router.get("/", async (req, res, next) => {
   try {
     const orders = await Order.find();
@@ -29,6 +31,12 @@ router.get("/:orderId", async (req, res, next) => {
 // POST create a new order
 router.post("/", async (req, res, next) => {
   try {
+    // Validate order before saving
+    const { error } = validateOrder(req.body);
+    if (error) {
+      return res.status(400).json({ message: error.message });
+    }
+
     const newOrder = new Order(req.body);
     const savedOrder = await newOrder.save();
     res.status(201).json(savedOrder);

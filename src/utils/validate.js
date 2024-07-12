@@ -32,10 +32,8 @@ const productSchema = Joi.object({
 const orderSchema = Joi.object({
   purchaseDate: Joi.date(),
   products: Joi.array().required(),
-  userId: Joi.string(),
-  createdAt: Joi.date(),
-  isDeleted: Joi.boolean(),
-  updatedAt: Joi.date(),
+  userId: Joi.string().required(),
+  orderStatus: Joi.string(),
 });
 
 const validateRegister = async (data) => {
