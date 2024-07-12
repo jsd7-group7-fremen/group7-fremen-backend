@@ -1,26 +1,24 @@
 import express from "express";
-import Product from "../models/product.model.js";
+import * as productController from "../controllers/productController.js";
 
 const router = express.Router();
 
-//ดึงข้อมูลสินค้าทุกตัว
-router.get("/", async (req, res, next) => {
-  const products = await Product.findOne();
-  console.log(products);
+//ดึงข้อมูลสินค้าทุกตัว, API-15
+router.get("/", productController.getProducts);
 
-  res.json("products connected");
-});
+//ดึงข้อมูลสินค้า 1 รายการ, API-16
+router.get("/:productId", productController.getProductById);
 
-//ดึงข้อมูลสินค้า 1 รายการ
-router.get("/:productId", async (req, res, next) => {});
+//สร้างสินค้าใหม่, API-17
+router.post("/", productController.createProduct);
 
-//สร้างสินค้าใหม่
-router.post("/", async (req, res, next) => {});
+//อัพเดตสินค้าแต่ละรายการ, API-18
+router.patch("/:productId", productController.updateProduct);
 
-//อัพเดตสินค้าแต่ละรายการ
-router.patch("/:productId", async (req, res, next) => {});
+//ลบสินค้าแต่ละรายการ, API-19 --> soft delete product from database by updating productStatus = "deleted"
+router.delete("/:productId", productController.softDeleteProduct);
 
-//ลบสินค้าแต่ละรายการ
-router.delete("/:productId", async (req, res, next) => {});
+//ลบสินค้าแต่ละรายการจริง API-19-1 --> Hard delete ลบของจริงจาก database
+router.delete("/hardDelete/:productId", productController.hardDeleteProduct);
 
 export default router;
