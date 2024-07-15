@@ -4,7 +4,7 @@ import * as cartController from "../controllers/cartController.js";
 const router = express.Router();
 
 // เพิ่มสินค้าในตะกร้า
-router.post("/", cartController.addToCart);
+router.post("/:_id", cartController.addToCart);
 
 // ลบสินค้าออกจากตะกร้า
 router.delete("/", cartController.removeFromCart);
@@ -16,6 +16,6 @@ router.patch("/", cartController.updateCart);
 router.get("/:userId", cartController.getCart);
 
 // ลบตะกร้าสินค้าของผู้ใช้
-router.post("/clear", cartController.clearCart);
+router.post("/clear/:_id", cartController.clearCart);
 
 export default router;
