@@ -12,7 +12,7 @@ import filterRoute from "./src/routes/filterRoute.js";
 
 import errorMiddleware from "./src/middleware/errorMiddleware.js";
 import notFoundMiddleware from "./src/middleware/notFoundMiddleware.js";
-// import authenticateMiddleware from "./src/middleware/authenticateMiddleware.js";
+import authenticateMiddleware from "./src/middleware/authenticateMiddleware.js";
 // import adminAuthenticateMiddleware from "./middleware/adminAuthenticateMiddleware.js";
 
 mongoose.connect(process.env.MONGO_URI);
@@ -33,7 +33,7 @@ app.use(
 app.use("/auth", authRoute);
 app.use("/users", userRoute);
 app.use("/products", productRoute);
-app.use("/carts", cartRoute);
+app.use("/carts",authenticateMiddleware, cartRoute);
 app.use("/order", orderRoute);
 app.use("/filter", filterRoute);
 
