@@ -4,13 +4,12 @@ import BadRequestError from "../error/BadRequestError.js";
 import NotFoundError from "../error/NotFoundError.js";
 import mongoose from "mongoose";
 
-
 // เพิ่มสินค้าในตะกร้า
 const addToCart = async (req, res, next) => {
   try {
-    const {  productId, quantity, size } = req.body;
-    const {_id} = req.params;
-    if (!_id || !productId || !quantity || !size  ) {
+    const { _id, productId, quantity, size } = req.body;
+
+    if (!_id || !productId || !quantity || !size) {
       throw new BadRequestError("Missing required fields");
     }
 
@@ -47,7 +46,7 @@ const addToCart = async (req, res, next) => {
 // ลบสินค้าออกจากตะกร้า
 const removeFromCart = async (req, res, next) => {
   try {
-    const { _id, productId,size } = req.body;
+    const { _id, productId, size } = req.body;
 
     if (!size) {
       throw new BadRequestError("Missing size fields");
@@ -138,7 +137,7 @@ const getCart = async (req, res, next) => {
 // ลบตะกร้าสินค้าของผู้ใช้
 const clearCart = async (req, res, next) => {
   try {
-    const { _id } = req.params;
+    const { _id } = req.body;
 
     if (!_id) {
       throw new BadRequestError("Missing required field: _id");

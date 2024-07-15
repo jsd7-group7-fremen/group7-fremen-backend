@@ -12,7 +12,7 @@ import filterRoute from "./src/routes/filterRoute.js";
 
 import errorMiddleware from "./src/middleware/errorMiddleware.js";
 import notFoundMiddleware from "./src/middleware/notFoundMiddleware.js";
-// import authenticateMiddleware from "./src/middleware/authenticateMiddleware.js";
+import authenticateMiddleware from "./src/middleware/authenticateMiddleware.js";
 // import adminAuthenticateMiddleware from "./middleware/adminAuthenticateMiddleware.js";
 
 mongoose.connect(process.env.MONGO_URI);
