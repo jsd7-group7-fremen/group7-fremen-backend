@@ -29,11 +29,11 @@ app.use(
     origin: "*",
   })
 );
-// add authenticateMiddleware and adminAuthenticateMiddleware
+
 app.use("/auth", authRoute);
-app.use("/users", userRoute);
+app.use("/users", authenticateMiddleware, userRoute);
 app.use("/products", productRoute);
-app.use("/carts", cartRoute);
+app.use("/carts", authenticateMiddleware, cartRoute);
 app.use("/order", orderRoute);
 app.use("/filter", filterRoute);
 
