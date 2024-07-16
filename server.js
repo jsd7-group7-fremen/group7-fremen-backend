@@ -8,6 +8,7 @@ import cartRoute from "./src/routes/cartRoute.js";
 import orderRoute from "./src/routes/orderRoute.js";
 import userRoute from "./src/routes/userRoute.js";
 import authRoute from "./src/routes/authRoute.js";
+import filterRoute from "./src/routes/filterRoute.js";
 
 import errorMiddleware from "./src/middleware/errorMiddleware.js";
 import notFoundMiddleware from "./src/middleware/notFoundMiddleware.js";
@@ -34,6 +35,7 @@ app.use("/users", authenticateMiddleware, userRoute);
 app.use("/products", productRoute);
 app.use("/carts", authenticateMiddleware, cartRoute);
 app.use("/order", orderRoute);
+app.use("/filter", filterRoute);
 
 app.use(notFoundMiddleware);
 

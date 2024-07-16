@@ -20,11 +20,11 @@ const orderSchema = new Schema({
 });
 
 // Set cancelledDate only when the order status is "cancelled"
-orderSchema.pre("save", function (next) {
-  if (this.orderStatus === "cancelled" && !this.cancelledDate) {
-    this.cancelledDate = new Date();
-  }
-  next();
-});
+// orderSchema.pre("save", function (next) {
+//   if (this.orderStatus === "cancelled" && !this.cancelledDate) {
+//     this.cancelledDate = new Date();
+//   }
+//   next();
+// });
 
 export default mongoose.model("Order", orderSchema);
