@@ -20,7 +20,7 @@ const addToCart = async (req, res, next) => {
     }
 
     // ค้นหาผู้ใช้และตะกร้าสินค้าของผู้ใช้
-    let user = await User.findById(_id);
+    let user = await User.findById(_id).populate('cart.productId');
 
     if (!user) {
       throw new NotFoundError("User not found");

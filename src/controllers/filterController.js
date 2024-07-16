@@ -12,7 +12,7 @@ const filterProductsByCategory = async (req, res, next) => {
   if (search) {
     query.$or = [
       { productName: { $regex: search, $options: "i" } },
-      { description: { $regex: search, $options: "i" } },
+      { brand:       { $regex: search, $options: "i" } },
     ];
   }
 
