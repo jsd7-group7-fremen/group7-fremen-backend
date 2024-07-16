@@ -11,7 +11,7 @@ import authRoute from "./src/routes/authRoute.js";
 
 import errorMiddleware from "./src/middleware/errorMiddleware.js";
 import notFoundMiddleware from "./src/middleware/notFoundMiddleware.js";
-// import authenticateMiddleware from "./src/middleware/authenticateMiddleware.js";
+import authenticateMiddleware from "./src/middleware/authenticateMiddleware.js";
 // import adminAuthenticateMiddleware from "./middleware/adminAuthenticateMiddleware.js";
 
 mongoose.connect(process.env.MONGO_URI);
@@ -28,11 +28,11 @@ app.use(
     origin: "*",
   })
 );
-// add authenticateMiddleware and adminAuthenticateMiddleware
+
 app.use("/auth", authRoute);
-app.use("/users", userRoute);
+app.use("/users", authenticateMiddleware, userRoute);
 app.use("/products", productRoute);
-app.use("/carts", cartRoute);
+app.use("/carts", authenticateMiddleware, cartRoute);
 app.use("/order", orderRoute);
 
 app.use(notFoundMiddleware);
