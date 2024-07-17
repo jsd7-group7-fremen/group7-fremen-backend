@@ -8,7 +8,7 @@ const sign = (payload) => {
 };
 
 const verify = (token) => {
-  console.log("Verify Token", process.env.ACCESS_TOKEN_SECRET);
+  // console.log("Verify Token", process.env.ACCESS_TOKEN_SECRET);
   return jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 };
 
